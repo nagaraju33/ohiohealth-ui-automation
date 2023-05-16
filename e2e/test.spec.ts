@@ -1,11 +1,26 @@
-describe('test case #1', async () => {
-    it('test step #1', async () => {
-        await browser.url('https://www.ohiohealth.com/find-a-doctor');
-        await browser.pause(5000);
-        await (await $(`[class="react-autosuggest__input"]`)).setValue("Shane D Smith")
-        await browser.pause(5000);
-        await (await $(`[class="btn apply-button fad-search-button desktop"]`)).click
-        await browser.pause(5000);
-        console.log("Test case #1 is executed");
+import { OHIO_HEALTH_FIND_DOCTOR_URL } from "./meta-data/page-config-urls";
+import { findDoctorPageService } from "./services/find-doctor.page.service";
+import { homePageService } from "./services/home.page.service";
+
+describe('find-a-doctor test case', async () => {
+    it('test step #1 Browser Function', async () => {
+        await homePageService.launchPage(OHIO_HEALTH_FIND_DOCTOR_URL);
+    });
+
+    it('test step #2 Search for specialties', async () => {
+        await findDoctorPageService.searchForDoctor("Shane D Smith");
+
+    });
+
+    it('test step #3 Verfiy Correct specialties specification', async () => {
+       
+        findDoctorPageService.verfiydoctorSpecialties();
+
     })
+    it('test step #4 browser Close', async () => {
+        
+        console.log("find-a-doctor test case is executed"); 
+ 
+     })
 })
+
